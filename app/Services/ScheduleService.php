@@ -11,10 +11,14 @@ use Illuminate\Support\Facades\Validator;
 class ScheduleService
 {
     private $errors = [];
+
+    /*
+   * mechanism add shedule
+   * */
     public function add(Request $data) {
 
         $station = false;
-        if ($data->has('new-train-station')) {
+        if ($data->has('new-train-station')) { // create new station if exist
 
 
             $postNewStation = [
@@ -30,7 +34,7 @@ class ScheduleService
             }
 
         }
-        else if ($data->has('train-station')) {
+        else if ($data->has('train-station')) { // or use selected station
 
           $station = Station::find($data['train-station']);
         }
@@ -39,7 +43,7 @@ class ScheduleService
             $this->errors = array_merge($this->errors, 'Station not found!');
         }
 
-        if ($station) {
+        if ($station) { // create schedule for station
 
 
             $postSchedule = [
@@ -84,15 +88,17 @@ class ScheduleService
     }
 
 
-
+    // for main index table
     public function getAllShedule() {
         return Schedule::with('stations')->orderBy('train_time')->get();
     }
 
+    // find one shedule
     public function getSheduleById($id) {
         return Schedule::find($id);
     }
 
+    // edit shedule record
     public function edit(Request $data,$id) {
         $station = $schedule = false;
 
@@ -102,7 +108,7 @@ class ScheduleService
             if ($data->has('new-train-station')) {
 
 
-                $postNewStation = [
+                $postNewStation = [ // create new station for this schedule
                     'name' => $data['new-train-station']
                 ];
 
@@ -115,7 +121,7 @@ class ScheduleService
                 }
 
             }
-            else if ($data->has('train-station')) {
+            else if ($data->has('train-station')) { // or use current
 
                 $station = Station::find($data['train-station']);
             }
@@ -167,6 +173,7 @@ class ScheduleService
 
     }
 
+    // delete record schedule
     public function delete($id) {
         $schedule = false;
         $schedule = Schedule::find($id);
@@ -183,6 +190,7 @@ class ScheduleService
 
         return redirect()->back();
     }
+
 
     public function getAllStations()
     {

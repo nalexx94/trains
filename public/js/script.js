@@ -141,6 +141,7 @@ $(function(){
             date = new Date();
             $( "#datepicker" ).datepicker('setDate',date);
         }
+
         var textStation = $('#filter-country option:selected').text();
         console.log(textStation);
 

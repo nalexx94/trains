@@ -5,6 +5,9 @@ namespace App\Helpers;
 class GlobalHelper
 {
 
+    /*
+    * get string name days by their index
+    * */
     public function regularityByArray($array){
         if (is_array($array)) {
             $resText = '';
@@ -28,6 +31,9 @@ class GlobalHelper
         }
     }
 
+    /*
+     * Helper for checked boxes in edit
+     * */
     public function setCheckboxAttr($array,$ind) {
         if (is_array($array)) {
             if (in_array($ind,$array)) {
@@ -36,6 +42,9 @@ class GlobalHelper
         }
     }
 
+    /*
+     * create new array if everyday trains was checked
+     * */
     public function checkEveryDay($array) {
         if (is_array($array)) {
             $newArray = [];
@@ -49,6 +58,9 @@ class GlobalHelper
         }
     }
 
+    /*
+     * set format hh:mm for inputs time
+     * */
     public function setFormatTime($time)
     {
         return date('H:i',strtotime($time.''));
