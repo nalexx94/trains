@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',['as' => 'home','uses'=>'ScheduleController@index'] );
+
+Route::get('/add',['as' => 'add-schedule','uses'=>'ScheduleController@getAdd'] );
+Route::post('/add',['as' => 'add-schedule','uses'=>'ScheduleController@postAdd'] );
+
+Route::get('/edit/{id}',['as' => 'edit-schedule','uses'=>'ScheduleController@getEdit'] );
+Route::post('/edit/{id}',['as' => 'edit-schedule','uses'=>'ScheduleController@postEdit'] );
+
+Route::get('/delete/{id}',['as' => 'delete-schedule','uses'=>'ScheduleController@getDelete'] );
